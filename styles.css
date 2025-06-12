@@ -1,0 +1,64 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    text-align: center;
+    margin: 2rem;
+}
+
+.books {
+    width: 65vw;
+    height: 80vh;
+    outline: solid black;
+    border-radius: 10px;
+}
+
+.header_row {
+    background-color: lightblue;
+    font-weight: bold;
+}
+
+.books_row {
+    width: 65vw;
+    height: 10vh;
+    outline: solid blue;
+    outline-width: 1px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.books__title {
+    margin: 1.5rem;
+    width: 20vw;
+}
+
+.books__author {
+    margin: 1.5rem;
+    width: 12vw;
+}
+
+.books__pages {
+    margin: 1.5rem;
+    width: 8vw;
+}
+
+.books__availability {
+    margin: 1.5rem;
+    width: 8vw;
+}
+
+.books__read_status {
+    margin: 1.5rem;
+    width: 8vw;
+}
