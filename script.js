@@ -27,14 +27,14 @@ const inputPages = document.querySelector(".input__pages");
 // Class Declaration
 
 class Book {
-    constructor(title, author, pages, read) {
+    constructor(title, author, pages) {
         this.title = title;
         this.author = author;
         this.pages = pages;
     }
 
-    info(read) {
-        return `${this.title} by ${this.author}, ${this.pages} pages, ${read}`;
+    readStatus() {
+        return (this.read = "not read");
     }
 }
 
@@ -65,7 +65,9 @@ const displayBooks = function (library) {
                 <div class="books__author">${book.author}</div>
                 <div class="books__pages">${book.pages}</div>
                 <div class="books__id">${book.id}</div>
-                <div class="books__read_status">Not Read</div>
+                <div class="books__read_status">
+                   
+                </div>
             </div>`;
 
         booksArea.insertAdjacentHTML("beforeend", book_html);
@@ -128,3 +130,5 @@ function activateDeleteButtons() {
         });
     });
 }
+
+console.log(myLibrary[0].readStatus());
