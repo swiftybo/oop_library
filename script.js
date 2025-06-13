@@ -9,6 +9,16 @@ const myLibrary = [];
 
 const containerBooks = document.querySelector(".books");
 
+const btnAddBook = document.querySelector(".newbook__btn");
+const btnCloseDialog = document.querySelector(".close__btn");
+const btnCancel = document.querySelector(".cancel__btn");
+
+const dialog = document.querySelector(".dialog");
+
+const inputTitle = document.querySelector(".input__title");
+const inputAuthor = document.querySelector(".input__author");
+const inputPages = document.querySelector(".input__pages");
+
 ////////////////////////////////////////////////////////
 // Class Declaration
 
@@ -29,7 +39,7 @@ class Book {
 
 const addBookTolibrary = function (title, author, pages) {
     const newNovel = new Book(title, author, pages);
-    newNovel.id = crypto.randomUUID();
+    newNovel.id = crypto.randomUUID().split("-")[0];
     myLibrary.push(newNovel);
 };
 
@@ -40,7 +50,7 @@ const displayBooks = function (library) {
                 <div class="books__title">${book.title}</div>
                 <div class="books__author">${book.author}</div>
                 <div class="books__pages">${book.pages}</div>
-                <div class="books__availability">Available</div>
+                <div class="books__id">${book.id}</div>
                 <div class="books__read_status">Not Read</div>
             </div>`;
 
@@ -60,3 +70,20 @@ addBookTolibrary(
 addBookTolibrary("The Raven's Head", "Karen Maitland", 512);
 
 displayBooks(myLibrary);
+
+////////////////////////////////////////////////////////
+// Event Handlers
+
+btnAddBook.addEventListener("click", function () {
+    dialog.showModal();
+});
+
+btnCloseDialog.addEventListener("click", function () {
+    dialog.close();
+});
+
+btnCancel.addEventListener("click", function () {
+    dialog.close();
+});
+
+btn;

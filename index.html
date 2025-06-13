@@ -12,7 +12,7 @@
     </head>
     <body>
         <!-- Top Banner -->
-        <section class="header">
+        <section class="page__header">
             <h1>Leung's Library</h1>
 
             <!-- New Book Button -->
@@ -25,15 +25,36 @@
                 <div class="books__title">Title</div>
                 <div class="books__author">Author</div>
                 <div class="books__pages">Page Number</div>
-                <div class="books__availability">Availability</div>
+                <div class="books__id">ID</div>
                 <div class="books__read_status">Read Status</div>
             </div>
         </section>
 
         <!-- dialog box -->
-        <dialog class="dialog">
-            <h3>New Book Form</h3>
-            <p>Thank you for bringing a new book to Leung's Library</p>
+        <dialog class="dialog" closedby="any">
+            <div class="dialog__header">
+                <h2>New Book Form</h2>
+                <button class="close__btn">&#x2715</button>
+            </div>
+            <div class="dialog__content">
+                <p>Thank you for bringing a new book to Leung's Library! Fill out all the details below to add the book.</p>
+                <div class="input__field">
+                    <div class="input__label">Title:</div>
+                    <input class="input__description input__title">
+                </div>
+                <div class="input__field">
+                    <div class="input__label">Author:</div>
+                    <input class="input__description input__author">
+                </div>
+                <div class="input__field">
+                    <div class="input__label">Page Number:</div>
+                    <input class="input__pages">
+                </div>
+            </div>
+            <div class="dialog__footer">
+                <button class="footer__btn cancel__btn">Cancel</button>
+                <button class="footer__btn submit__btn">Submit</button>
+            </div>
         </dialog>
 
         <script src="script.js"></script>

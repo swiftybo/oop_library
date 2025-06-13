@@ -11,7 +11,7 @@ body {
     align-items: center;
 }
 
-.header {
+.page__header {
     display: flex;
     justify-content: space-around;
     width: 80vw;
@@ -60,22 +60,85 @@ h1 {
 .books__author {
     margin: 1.5rem;
     width: 12vw;
+    text-align: center;
 }
 
 .books__pages {
     margin: 1.5rem;
     width: 8vw;
+    text-align: center;
 }
 
-.books__availability {
+.books__id {
     margin: 1.5rem;
     width: 8vw;
+    text-align: center;
 }
 
 .books__read_status {
     margin: 1.5rem;
     width: 8vw;
+    text-align: center;
 }
 
 .dialog {
+    position: absolute;
+    top: 30%;
+    left: 35%;
+    width: 30vw;
+    height: 25vw;
+}
+
+dialog::backdrop {
+    background-color: rgba(55, 55, 55, 0.6);
+    backdrop-filter: blur(5px);
+}
+
+.dialog__header {
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.close__btn {
+    width: 2rem;
+    height: 2rem;
+    font-size: 1.5rem;
+}
+
+.dialog__content {
+    padding: 0rem 1rem;
+}
+
+.input__field {
+    margin: 1rem 0rem;
+    display: flex;
+}
+
+.input__label {
+    margin-right: 1rem;
+}
+
+.input__description {
+    width: 100%;
+}
+
+.dialog__footer {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 2rem;
+}
+
+.footer__btn {
+    width: 25%;
+    height: 1.75rem;
+    font-size: 1rem;
+}
+
+.cancel__btn {
+    color: red;
+}
+
+.submit__btn {
+    color: rgb(5, 182, 5);
 }
