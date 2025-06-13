@@ -12,6 +12,7 @@ const containerBooks = document.querySelector(".books");
 const booksArea = document.querySelector(".books__area");
 
 const btnAddBook = document.querySelector(".newbook__btn");
+let btnsDeleteBook;
 const btnCloseDialog = document.querySelector(".close__btn");
 const btnCancel = document.querySelector(".cancel__btn");
 const btnSubmit = document.querySelector(".submit__btn");
@@ -44,6 +45,14 @@ const addBookTolibrary = function (title, author, pages) {
     const newNovel = new Book(title, author, pages);
     newNovel.id = crypto.randomUUID().split("-")[0];
     myLibrary.push(newNovel);
+    updateUI();
+};
+
+const removeBookFromLibrary = function (index) {
+    myLibrary.splice(index, 1);
+    console.log(myLibrary);
+    console.log(btnsDeleteBook);
+    updateUI();
 };
 
 const displayBooks = function (library) {
@@ -51,6 +60,7 @@ const displayBooks = function (library) {
     library.forEach(function (book) {
         const book_html = `
             <div class="books_row">
+                <button class="deletebook__btn">&#8722;</button>
                 <div class="books__title">${book.title}</div>
                 <div class="books__author">${book.author}</div>
                 <div class="books__pages">${book.pages}</div>
@@ -60,6 +70,15 @@ const displayBooks = function (library) {
 
         booksArea.insertAdjacentHTML("beforeend", book_html);
     });
+    btnsDeleteBook = document.querySelectorAll(".deletebook__btn");
+};
+
+const updateUI = function () {
+    // Update books list on UI
+    displayBooks(myLibrary);
+
+    //(Re)activate delete books button
+    activateDeleteButtons();
 };
 
 addBookTolibrary("The Hobbit", "J.R.R Tolkien", 295);
@@ -73,7 +92,7 @@ addBookTolibrary(
 );
 addBookTolibrary("The Raven's Head", "Karen Maitland", 512);
 
-displayBooks(myLibrary);
+updateUI();
 
 ////////////////////////////////////////////////////////
 // Event Handlers
@@ -95,9 +114,17 @@ btnSubmit.addEventListener("click", function () {
     const newBookAuthor = inputAuthor.value;
     const newBookPages = Number(inputPages.value);
     addBookTolibrary(newBookTitle, newBookAuthor, newBookPages);
-    displayBooks(myLibrary);
     dialog.close();
     inputTitle.value = "";
     inputAuthor.value = "";
     inputPages.value = "";
 });
+
+function activateDeleteButtons() {
+    btnsDeleteBook.forEach(function (button, index) {
+        button.addEventListener("click", () => {
+            console.log(index);
+            removeBookFromLibrary(index);
+        });
+    });
+}

@@ -42,19 +42,39 @@ h1 {
     font-weight: bold;
 }
 
+.books__area {
+    height: 70vh;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
 .books_row {
     width: 65vw;
     height: 10vh;
-    outline: solid blue;
-    outline-width: 1px;
-    border-radius: 10px;
+    outline: solid;
+    outline-width: 0.8px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.deletebook__btn {
+    padding: 0.3rem;
+    background-color: rgb(202, 43, 43);
+    margin-left: 0.45rem;
+    border-radius: 5px;
+    height: 25px;
     display: flex;
     align-items: center;
 }
 
 .books__title {
-    margin: 1.5rem;
+    margin: 1.5rem 1.5rem 1.5rem 1.8rem;
     width: 20vw;
+}
+
+.header__title {
+    margin-left: 3.5rem;
 }
 
 .books__author {
