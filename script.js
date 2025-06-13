@@ -17,6 +17,8 @@ const btnCloseDialog = document.querySelector(".close__btn");
 const btnCancel = document.querySelector(".cancel__btn");
 const btnSubmit = document.querySelector(".submit__btn");
 
+let btnsReadStatus;
+
 const dialog = document.querySelector(".dialog");
 
 const inputTitle = document.querySelector(".input__title");
@@ -65,14 +67,13 @@ const displayBooks = function (library) {
                 <div class="books__author">${book.author}</div>
                 <div class="books__pages">${book.pages}</div>
                 <div class="books__id">${book.id}</div>
-                <div class="books__read_status">
-                   
-                </div>
+                <button class="books__read_status">Read</button>
             </div>`;
 
         booksArea.insertAdjacentHTML("beforeend", book_html);
     });
     btnsDeleteBook = document.querySelectorAll(".deletebook__btn");
+    btnsReadStatus = document.querySelectorAll(".books__read_status");
 };
 
 const updateUI = function () {
@@ -81,6 +82,9 @@ const updateUI = function () {
 
     //(Re)activate delete books button
     activateDeleteButtons();
+
+    //(Re)activate read buttons
+    activateReadButtons();
 };
 
 addBookTolibrary("The Hobbit", "J.R.R Tolkien", 295);
@@ -125,10 +129,21 @@ btnSubmit.addEventListener("click", function () {
 function activateDeleteButtons() {
     btnsDeleteBook.forEach(function (button, index) {
         button.addEventListener("click", () => {
-            console.log(index);
             removeBookFromLibrary(index);
         });
     });
 }
 
-console.log(myLibrary[0].readStatus());
+function activateReadButtons() {
+    btnsReadStatus.forEach(function (button, index) {
+        button.addEventListener("click", function () {
+            if (myLibrary[index].read || myLibrary[index].read === "not read") {
+                myLibrary[index].read = "read";
+                button.textContent = "not read";
+                console.log("You've now read this!");
+            } else if (myLibrary[index].read === "read") {
+                console.log("You've no longer read this!");
+            }
+        });
+    });
+}
