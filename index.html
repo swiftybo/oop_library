@@ -11,10 +11,16 @@
         />
     </head>
     <body>
-        <h1>Leung's Library</h1>
+        <!-- Top Banner -->
+        <section class="header">
+            <h1>Leung's Library</h1>
+
+            <!-- New Book Button -->
+            <button class="newbook__btn">Add New Book</button>
+        </section>
 
         <!-- books -->
-        <div class="books">
+        <section class="books">
             <div class="books_row header_row">
                 <div class="books__title">Title</div>
                 <div class="books__author">Author</div>
@@ -22,8 +28,13 @@
                 <div class="books__availability">Availability</div>
                 <div class="books__read_status">Read Status</div>
             </div>
-            <div class="books_row"></div>
-        </div>
+        </section>
+
+        <!-- dialog box -->
+        <dialog class="dialog">
+            <h3>New Book Form</h3>
+            <p>Thank you for bringing a new book to Leung's Library</p>
+        </dialog>
 
         <script src="script.js"></script>
     </body>

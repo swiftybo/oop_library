@@ -11,9 +11,23 @@ body {
     align-items: center;
 }
 
+.header {
+    display: flex;
+    justify-content: space-around;
+    width: 80vw;
+    align-items: center;
+}
+
+.newbook__btn {
+    height: 4rem;
+    width: 15vw;
+    font-size: 20px;
+}
+
 h1 {
     text-align: center;
     margin: 2rem;
+    font-size: 36px;
 }
 
 .books {
@@ -61,4 +75,7 @@ h1 {
 .books__read_status {
     margin: 1.5rem;
     width: 8vw;
+}
+
+.dialog {
 }
