@@ -9,9 +9,12 @@ const myLibrary = [];
 
 const containerBooks = document.querySelector(".books");
 
+const booksArea = document.querySelector(".books__area");
+
 const btnAddBook = document.querySelector(".newbook__btn");
 const btnCloseDialog = document.querySelector(".close__btn");
 const btnCancel = document.querySelector(".cancel__btn");
+const btnSubmit = document.querySelector(".submit__btn");
 
 const dialog = document.querySelector(".dialog");
 
@@ -44,8 +47,9 @@ const addBookTolibrary = function (title, author, pages) {
 };
 
 const displayBooks = function (library) {
+    booksArea.innerHTML = "";
     library.forEach(function (book) {
-        const html = `
+        const book_html = `
             <div class="books_row">
                 <div class="books__title">${book.title}</div>
                 <div class="books__author">${book.author}</div>
@@ -54,7 +58,7 @@ const displayBooks = function (library) {
                 <div class="books__read_status">Not Read</div>
             </div>`;
 
-        containerBooks.insertAdjacentHTML("beforeend", html);
+        booksArea.insertAdjacentHTML("beforeend", book_html);
     });
 };
 
@@ -86,4 +90,14 @@ btnCancel.addEventListener("click", function () {
     dialog.close();
 });
 
-btn;
+btnSubmit.addEventListener("click", function () {
+    const newBookTitle = inputTitle.value;
+    const newBookAuthor = inputAuthor.value;
+    const newBookPages = Number(inputPages.value);
+    addBookTolibrary(newBookTitle, newBookAuthor, newBookPages);
+    displayBooks(myLibrary);
+    dialog.close();
+    inputTitle.value = "";
+    inputAuthor.value = "";
+    inputPages.value = "";
+});
