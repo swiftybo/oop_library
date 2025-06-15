@@ -31,7 +31,7 @@ h1 {
 }
 
 .books {
-    width: 65vw;
+    width: 70vw;
     height: 80vh;
     outline: solid black;
     border-radius: 10px;
@@ -49,7 +49,7 @@ h1 {
 }
 
 .books_row {
-    width: 65vw;
+    width: 70vw;
     height: 10vh;
     outline: solid;
     outline-width: 0.8px;
@@ -100,6 +100,12 @@ h1 {
 .books__read {
     margin: 1.5rem;
     width: 8vw;
+    text-align: center;
+}
+
+.books__read_title {
+    margin: 1.5rem;
+    width: 4vw;
     text-align: center;
 }
 

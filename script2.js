@@ -33,62 +33,16 @@ class BookCl {
         this.title = title;
         this.author = author;
         this.pages = pages;
-        this.read = "not read";
+        this.read = "Not Read";
     }
 
     readBook() {
-        this.read = "read";
-        updateUI();
+        return (this.read = "Read");
     }
 
     unreadBook() {
-        return (this.read = "not read");
+        return (this.read = "Not Read");
     }
-}
-
-////////////////////////////////////////////////////////
-// Functions
-
-const addBookTolibrary = function (title, author, pages) {
-    const newNovel = new BookCl(title, author, pages);
-    newNovel.id = crypto.randomUUID().split("-")[0];
-    myLibrary.push(newNovel);
-    updateUI();
-};
-
-const removeBookFromLibrary = function (index) {
-    myLibrary.splice(index, 1);
-    console.log(myLibrary);
-    console.log(btnsDeleteBook);
-    updateUI();
-};
-
-const displayBooks = function (library) {
-    booksArea.innerHTML = "";
-    library.forEach(function (book) {
-        const book_html = `
-            <div class="books_row books_row_unread">
-                <button class="deletebook__btn">&#8722;</button>
-                <div class="books__title">${book.title}</div>
-                <div class="books__author">${book.author}</div>
-                <div class="books__pages">${book.pages}</div>
-                <div class="books__read">${book.read}</div>
-                <button class="books__read_status">read</button>
-            </div>`;
-
-        booksArea.insertAdjacentHTML("beforeend", book_html);
-    });
-};
-
-function updateUI() {
-    // Update books list on UI
-    displayBooks(myLibrary);
-
-    //(Re)activate delete books button
-    activateDeleteButtons();
-
-    //(Re)activate read buttons
-    // activateReadButtons();
 }
 
 addBookTolibrary("The Hobbit", "J.R.R Tolkien", 295);
@@ -101,6 +55,41 @@ addBookTolibrary(
     870
 );
 addBookTolibrary("The Raven's Head", "Karen Maitland", 512);
+
+////////////////////////////////////////////////////////
+// Functions
+
+function addBookTolibrary(title, author, pages) {
+    const newNovel = new BookCl(title, author, pages);
+    newNovel.id = crypto.randomUUID().split("-")[0];
+    myLibrary.push(newNovel);
+    displayBooks(myLibrary);
+    activateButtons();
+}
+
+function displayBooks(library) {
+    booksArea.innerHTML = "";
+    library.forEach(function (book) {
+        const book_html = `
+            <div class="books_row books_row_unread">
+                <button class="deletebook__btn">&#8722;</button>
+                <div class="books__title">${book.title}</div>
+                <div class="books__author">${book.author}</div>
+                <div class="books__pages">${book.pages}</div>
+                <div class="books__read">${book.read}</div>
+                <button class="books__read_status">Read</button>
+            </div>`;
+
+        booksArea.insertAdjacentHTML("beforeend", book_html);
+    });
+}
+
+const removeBookFromLibrary = function (index) {
+    myLibrary.splice(index, 1);
+    console.log(myLibrary);
+    displayBooks(myLibrary);
+    activateButtons();
+};
 
 ////////////////////////////////////////////////////////
 // Event Handlers
@@ -128,34 +117,49 @@ btnSubmit.addEventListener("click", function () {
     inputPages.value = "";
 });
 
-function activateDeleteButtons() {
+// Necessary to re-activate "Delete" and "readStatus" buttons after additions to myLibrary array as new buttons will not be in the button node list.
+function activateButtons() {
     btnsDeleteBook = document.querySelectorAll(".deletebook__btn");
     btnsDeleteBook.forEach(function (button, index) {
         button.addEventListener("click", () => {
             removeBookFromLibrary(index);
         });
     });
-}
 
-// function activateReadButtons() {
-//     btnsReadStatus = document.querySelectorAll(".books__read_status");
-//     btnsReadStatus.forEach(function (button, index) {
-//         // Associating DOM Read Buttons with Book Objects
-//         button.dataset.id = myLibrary[index].id;
-//         button.addEventListener("click", function () {
-//             const targetBook = myLibrary.find(
-//                 (book) => button.dataset.id === book.id
-//             );
-//             console.log(button);
-//             if (targetBook.read === "not read") {
-//                 console.log("You've now read this!");
-//                 button.textContent = "Not Read";
-//                 targetBook.readBook();
-//             } else if (targetBook.read === "read") {
-//                 console.log("You've no longer read this!");
-//                 button.textContent = "Read";
-//                 targetBook.unreadBook();
-//             }
-//         });
-//     });
-// }
+    btnsReadStatus = document.querySelectorAll(".books__read_status");
+    btnsReadStatus.forEach(function (button, index) {
+        // Associating DOM Read Buttons with Book Objects
+        button.dataset.id = myLibrary[index].id;
+        button.addEventListener("click", function () {
+            const targetBook = myLibrary.find(
+                (book) => button.dataset.id === book.id
+            );
+            if (targetBook.read === "Not Read") {
+                targetBook.readBook();
+                button.textContent = "Not Read";
+                // index + 1 as header has same class.
+                document.querySelectorAll(".books__read")[
+                    index + 1
+                ].textContent = targetBook.read;
+                document
+                    .querySelectorAll(".books_row")
+                    [index + 1].classList.remove("books_row_unread");
+                document
+                    .querySelectorAll(".books_row")
+                    [index + 1].classList.add("books_row_read");
+            } else if (targetBook.read === "Read") {
+                targetBook.unreadBook();
+                button.textContent = "Read";
+                document.querySelectorAll(".books__read")[
+                    index + 1
+                ].textContent = targetBook.read;
+                document
+                    .querySelectorAll(".books_row")
+                    [index + 1].classList.remove("books_row_read");
+                document
+                    .querySelectorAll(".books_row")
+                    [index + 1].classList.add("books_row_unread");
+            }
+        });
+    });
+}
