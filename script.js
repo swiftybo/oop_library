@@ -28,14 +28,18 @@ const inputPages = document.querySelector(".input__pages");
 ////////////////////////////////////////////////////////
 // Class Declaration
 
-class Book {
+class BookCl {
     constructor(title, author, pages) {
         this.title = title;
         this.author = author;
         this.pages = pages;
     }
 
-    readStatus() {
+    read() {
+        return (this.read = "read");
+    }
+
+    unread() {
         return (this.read = "not read");
     }
 }
@@ -44,7 +48,7 @@ class Book {
 // Functions
 
 const addBookTolibrary = function (title, author, pages) {
-    const newNovel = new Book(title, author, pages);
+    const newNovel = new BookCl(title, author, pages);
     newNovel.id = crypto.randomUUID().split("-")[0];
     myLibrary.push(newNovel);
     updateUI();
@@ -61,12 +65,12 @@ const displayBooks = function (library) {
     booksArea.innerHTML = "";
     library.forEach(function (book) {
         const book_html = `
-            <div class="books_row">
+            <div class="books_row books_row_unread">
                 <button class="deletebook__btn">&#8722;</button>
                 <div class="books__title">${book.title}</div>
                 <div class="books__author">${book.author}</div>
                 <div class="books__pages">${book.pages}</div>
-                <div class="books__id">${book.id}</div>
+                <div class="books__read">Not Read</div>
                 <button class="books__read_status">Read</button>
             </div>`;
 
@@ -136,14 +140,20 @@ function activateDeleteButtons() {
 
 function activateReadButtons() {
     btnsReadStatus.forEach(function (button, index) {
-        button.addEventListener("click", function () {
-            if (myLibrary[index].read || myLibrary[index].read === "not read") {
-                myLibrary[index].read = "read";
-                button.textContent = "not read";
-                console.log("You've now read this!");
-            } else if (myLibrary[index].read === "read") {
-                console.log("You've no longer read this!");
-            }
-        });
+        const currentBook = myLibrary[index];
+        button.addEventListener("click", currentBook.read.bind(currentBook));
+        // {
+        //     console.log(currentBook);
+        //     if (button.textContent === "Read") {
+        //         console.log("You've now read this!");
+        //         // console.log(Object.getPrototypeOf(currentBook));
+        //         currentBook.read();
+        //         button.textContent = "Not Read";
+        //     } else if (button.textContent === "Not Read") {
+        //         console.log("You've no longer read this!");
+        //         myLibrary[index].unread();
+        //         button.textContent = "Read";
+        //     }
+        // });
     });
 }

@@ -58,6 +58,14 @@ h1 {
     align-items: center;
 }
 
+.books_row_unread {
+    background-color: rgb(253, 184, 184);
+}
+
+.books_row_read {
+    background-color: rgb(156, 238, 153);
+}
+
 .deletebook__btn {
     padding: 0.3rem;
     background-color: rgb(202, 43, 43);
@@ -89,7 +97,7 @@ h1 {
     text-align: center;
 }
 
-.books__id {
+.books__read {
     margin: 1.5rem;
     width: 8vw;
     text-align: center;
