@@ -71,7 +71,9 @@ function displayBooks(library) {
     booksArea.innerHTML = "";
     library.forEach(function (book) {
         const book_html = `
-            <div class="books_row books_row_unread">
+            <div class="books_row ${
+                book.read === "Read" ? "books_row_read" : "books_row_unread"
+            }">
                 <button class="deletebook__btn">&#8722;</button>
                 <div class="books__title">${book.title}</div>
                 <div class="books__author">${book.author}</div>
