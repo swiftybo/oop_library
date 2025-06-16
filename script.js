@@ -1,4 +1,5 @@
 "use strict";
+// Use script2.js to refer to the working js code behind the oop library project.
 
 ////////////////////////////////////////////////////////
 // Data
